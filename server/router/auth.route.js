@@ -10,7 +10,7 @@ router.use(express.json())
 
 router.post('/signup', userRegistration)
 router.post('/login', userLogin)
-router.post('/update',verifyrole, userUpdate)
+router.post('/update', userUpdate)
 router.post('/passwordreset', userPasswordReset)
 router.delete('/deleteaccount', deleteuser)
 router.delete('/logout', logoutuser)
