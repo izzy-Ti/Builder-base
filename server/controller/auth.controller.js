@@ -61,36 +61,40 @@ export const userLogin = async (req,res) =>{
 } 
 export const userUpdate = async (req,res) =>{
     const {fullname, username, email} = req.body
-    const user = verifyuser(req,res);
-    const updateduser =await users.findByIdAndUpdate(user.id,{
-        fullname,
-        email,
-        username
-    },{new:true})
-    res.json({success: 'true', message: 'Update successful', user: user})
+    try {
+        const user = verifyuser(req,res);
+        const updateduser =await users.findByIdAndUpdate(user.id,{
+            fullname,
+            email,
+            username
+        },{new:true})
+        res.json({success: 'true', message: 'Update successful', user: updateduser})
+    } catch (error) {
+        return res.json({success: 'false', message: 'Something went wrong'})
+    }
 }
 export const userPasswordReset = async (req,res) =>{
     const {password} = req.body
-    const hashedPassword = await bycrpt.hash(password, 10)
-    const token = req.cookies.token
-    if(!token) {
-        req.json({success: 'false', message: 'please Login'})
+    try {
+        const hashedPassword = await bycrpt.hash(password, 10)
+        const user = verifyuser(req,res);
+        const updateduser =await users.findByIdAndUpdate(user.id,{
+            password:hashedPassword
+        },{new:true})
+        res.json({success: 'true', message: 'Password updated successfully', user: updateduser})
+    } catch(error) {
+        return res.json({success: 'false', message: 'Something went wrong'})
     }
-    const userId = jwt.verify(token, process.env.TOKEN_SECRET)
-    const user =await users.findByIdAndUpdate(userId.id,{
-        password:hashedPassword
-    },{new:true})
-    res.json(user)
 }
 export const deleteuser = async (req,res) =>{
-    const token = req.cookies.token
-    if(!token) {
-        req.json({success: 'false', message: 'please Login'})
+    try {
+        const user = verifyuser(req,res);
+        const deleteduser = await users.findByIdAndDelete(user.id)
+        res.clearCookie('token')
+        res.json({success: 'true', message: 'Account deleted successfully'})
+    } catch (error) {
+        return res.json({success: 'false', message: 'Something went wrong'})
     }
-    const userId = jwt.verify(token, process.env.TOKEN_SECRET)
-    const user = await users.findByIdAndDelete(userId.id)
-    res.clearCookie('token')
-    res.send('Account deleted')
 }
 export const logoutuser = async (req,res) =>{
     res.clearCookie('token')
@@ -98,11 +102,11 @@ export const logoutuser = async (req,res) =>{
 }
 export const addfav = async (req,res) =>{
     const homeid = req.body
-    const token = req.cookies.token
-    if(!token) {
-        req.json({success: 'false', message: 'please Login'})
+    try {
+        const user = verifyuser(req,res);
+        user.fav.push(homeid)
+        res.json({success: 'true', message: 'Added to Fav'})
+    } catch (error) {
+        return res.json({success: 'false', message: 'Something went wrong'})
     }
-    const userId = jwt.verify(token, process.env.TOKEN_SECRET)
-    const user = await users.findByIdAndDelete(userId.id)
-    user.fav.push(homeid)
 }

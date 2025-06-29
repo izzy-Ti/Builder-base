@@ -7,34 +7,46 @@ export const viewbuilding = async (req,res) =>{
 export const addbuilding = async (req,res) =>{
     const {name, location, floor, built_year, discription, status} = req.body
     const image = req.files?.map(file => file.path);
-    const newbuilding = new building({
-        name,
-        location,
-        floor, 
-        built_year, 
-        image,
-        discription, 
-        status
-    })
-    await newbuilding.save()
-    res.json(newbuilding)
+    try{
+        const newbuilding = new building({
+            name,
+            location,
+            floor, 
+            built_year, 
+            image,
+            discription, 
+            status
+        })
+        await newbuilding.save()
+        res.json({success: 'true', message: 'Building added successfully', building: newbuilding})
+    } catch(error) {
+        return res.json({success: 'false', message: 'Something went wrong'})
+    }
 }
 export const updatebuilding =async (req,res) =>{
     const {id, name, location, floor, built_year, discription, status} = req.body
     const image = req.file.path
-    const build = await building.findByIdAndUpdate(id,{
-        name,
-        location,
-        floor, 
-        image,
-        built_year, 
-        discription, 
-        status
-    },{new: true})
-    res.json(build)
+    try{
+        const build = await building.findByIdAndUpdate(id,{
+            name,
+            location,
+            floor, 
+            image,
+            built_year, 
+            discription, 
+            status
+        },{new: true})
+        res.json({success: 'true', message: 'Building updated successfully', building: build})
+    } catch(error) {
+        return res.json({success: 'false', message: 'Something went wrong'})
+    }
 }
 export const deletebuilding = async (req,res) =>{
     const {id} = req.body
-    const build = await building.findByIdAndDelete(id)
-    res.json(build)
+    try{
+        const build = await building.findByIdAndDelete(id)
+        res.json({success: 'true', message: 'Building deleted successfully'})
+    } catch(error){
+        return res.json({success: 'false', message: 'Something went wrong'})
+    }
 }
