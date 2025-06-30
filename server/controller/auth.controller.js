@@ -9,6 +9,7 @@ dotenv.config()
 
 export const userfetch = async (req,res) =>{
     const user = await verifyuser(req,res);
+    if (res.headersSent) return;
     if(!user) {
         return res.json({success: false, message: 'Email or Username already exists'})
     }
@@ -67,13 +68,14 @@ export const userLogin = async (req,res) =>{
             })
         res.json({success: true, message: 'Login successful', user: user})
     } catch (error){
-        req.json({success: false, message: 'Something went wrong'})
+        res.json({success: false, message: 'Something went wrong'})
     }
 } 
 export const userUpdate = async (req,res) =>{
     const {fullname, username, email} = req.body
     try {
         const user = verifyuser(req,res);
+        if (res.headersSent) return;
         const updateduser =await users.findByIdAndUpdate(user.id,{
             fullname,
             email,
@@ -89,6 +91,7 @@ export const userPasswordReset = async (req,res) =>{
     try {
         const hashedPassword = await bycrpt.hash(password, 10)
         const user = verifyuser(req,res);
+        if (res.headersSent) return;
         const updateduser =await users.findByIdAndUpdate(user.id,{
             password:hashedPassword
         },{new:true})
@@ -100,6 +103,7 @@ export const userPasswordReset = async (req,res) =>{
 export const deleteuser = async (req,res) =>{
     try {
         const user = verifyuser(req,res);
+        if (res.headersSent) return;
         const deleteduser = await users.findByIdAndDelete(user.id)
         res.clearCookie('token')
         res.json({success: true, message: 'Account deleted successfully'})
@@ -119,6 +123,7 @@ export const addfav = async (req,res) =>{
     const homeid = req.body
     try {
         const user = verifyuser(req,res);
+        if (res.headersSent) return;
         user.fav.push(homeid)
         res.json({success: true, message: 'Added to Fav'})
     } catch (error) {

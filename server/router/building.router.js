@@ -7,7 +7,7 @@ const router = express.Router()
 router.use(express.json())
 
 router.get('/view', viewbuilding)
-router.post('/add',verifyrole,upload.array('image', 3), addbuilding)
+router.post('/add',upload.array('image', 3), addbuilding)
 router.put('/update',verifyrole,upload.array('image', 3), updatebuilding)
 router.delete('/delete',verifyrole, deletebuilding)
 

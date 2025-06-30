@@ -2,7 +2,7 @@
     background-Size: cover;
     background-Position: center;
     background-attachment: fixed;
-    height: 87vh;
+    height: 80vh;
     width: 100%;
     transition: 1s ease-in-out;
     top: 0;
@@ -12,7 +12,7 @@
     position: absolute;
     top: 150;
     left: 0;
-    height: 87%;
+    height: 80%;
     width: 100%;
     background: rgba(0, 0, 0, 0.628);
     z-index: 2;

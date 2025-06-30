@@ -1,3 +1,4 @@
+import { building } from "../models/building.js";
 import { home } from "../models/homes.js";
 
 
@@ -18,7 +19,8 @@ export const addhome = async (req,res) =>{
             image
         })
         await newhome.save()
-        res.json({success: 'true', message: 'Home added successfully', home: newhome})
+        const build = await building.findById(buildingId)
+        res.json({success: true, message: 'Home added successfully', home: newhome, build: build})
     } catch(error){
         return res.json({success: 'false', message: 'Something went wrong'})
     }

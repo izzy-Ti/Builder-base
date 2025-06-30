@@ -1,0 +1,46 @@
+.featured{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.fea_title{
+    font-size: 4rem;
+    font-weight: 500;
+}
+.fea_desc{
+    font-size: 1.5rem;
+    color: gray;
+}
+.fea_img{
+    width: 380px;
+    height: 360px;
+}
+.fea_cards{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    margin: 20px 70px;
+    justify-content: center;
+}
+.fea_card{
+    padding: 0px 0px;
+    border: 2px solid #98ded9;
+    margin: 20px 70px;
+    background-color: rgba(0, 0, 0, 0.064);
+}
+.fea_name{
+    font-size: 2rem;
+    margin: 10px 15px;
+}
+.fea_disc{
+    font-weight: 200;
+    margin: 10px 15px;
+}
+.flo_loc{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 15px;
+}
+.fea_yr{
+    margin: 10px 15px;
+
+}

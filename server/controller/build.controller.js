@@ -18,9 +18,9 @@ export const addbuilding = async (req,res) =>{
             status
         })
         await newbuilding.save()
-        res.json({success: 'true', message: 'Building added successfully', building: newbuilding})
+        res.json({success: true, message: 'Building added successfully', building: newbuilding})
     } catch(error) {
-        return res.json({success: 'false', message: 'Something went wrong'})
+        return res.json({success: false, message: 'Something went wrong'})
     }
 }
 export const updatebuilding =async (req,res) =>{
@@ -36,17 +36,17 @@ export const updatebuilding =async (req,res) =>{
             discription, 
             status
         },{new: true})
-        res.json({success: 'true', message: 'Building updated successfully', building: build})
+        res.json({success: true, message: 'Building updated successfully', building: build})
     } catch(error) {
-        return res.json({success: 'false', message: 'Something went wrong'})
+        return res.json({success: false, message: 'Something went wrong'})
     }
 }
 export const deletebuilding = async (req,res) =>{
     const {id} = req.body
     try{
         const build = await building.findByIdAndDelete(id)
-        res.json({success: 'true', message: 'Building deleted successfully'})
+        res.json({success: true, message: 'Building deleted successfully'})
     } catch(error){
-        return res.json({success: 'false', message: 'Something went wrong'})
+        return res.json({success: false, message: 'Something went wrong'})
     }
 }

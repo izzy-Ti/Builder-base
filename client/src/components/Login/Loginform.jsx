@@ -26,7 +26,7 @@ const Loginform = () => {
       email,
       fullname,
       password
-    })
+    },{withCredentials:true})
     setmessage(response.data.message)
     settoaster(response.data.success)
   }
@@ -34,16 +34,16 @@ const Loginform = () => {
     const response = await axios.post(' http://localhost:4000/user/login',{
       username,
       password
-    })
+    },{withCredentials:true})
     setmessage(response.data.message)
     settoaster(response.data.success)
   }
   useEffect(() => {
     if (toaster !== null) {
       if (toaster === true) {
-        toast.success(message);
         navigate('/')
         location.reload()
+        toast.success(message);
       } else if(toaster === false){
         toast.error(message);
       }
