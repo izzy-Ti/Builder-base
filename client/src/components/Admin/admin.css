@@ -1,0 +1,10 @@
+.building_ad{
+    margin: 50px 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.313);
+    padding: 30px 30px;
+    border-radius: 10px;
+}

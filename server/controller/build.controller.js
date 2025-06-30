@@ -20,7 +20,8 @@ export const addbuilding = async (req,res) =>{
         await newbuilding.save()
         res.json({success: true, message: 'Building added successfully', building: newbuilding})
     } catch(error) {
-        return res.json({success: false, message: 'Something went wrong'})
+        res.json({success: false, message: 'Something went wrong'})
+        console.log(error)
     }
 }
 export const updatebuilding =async (req,res) =>{

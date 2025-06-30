@@ -22,7 +22,7 @@ const Featured = () => {
       <p className='fea_desc'>Browse our top featured properties, selected for their quality and prime locations.</p>
       <div className="fea_cards">
         {
-            futured.map((future,index) =>{
+            futured.slice(0-3).map((future,index) =>{
                 return (
                 <div className='fea_card'>
                 <img src={future.image} alt="" className='fea_img'/>

@@ -7,6 +7,7 @@ import News from './pages/News'
 import {Toaster} from 'react-hot-toast'
 import Navbar from './components/Navbar/Navbar.jsx'
 import Login from './pages/Login'
+import Admin from './pages/Admin.jsx'
 
 
 
@@ -25,6 +26,7 @@ function App() {
         <Route path='/about' element= {<About />} />
         <Route path='/news' element= {<News />} />
         <Route path='/login' element = {<Login />} />
+        <Route path='/admin' element = {<Admin />} />
       </Routes>
     </>
   )
