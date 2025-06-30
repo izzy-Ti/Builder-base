@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <div className='navbar'>
       <div className='navbar_route'>
-        <img src={logo} alt="" />
+        <Link to='/' ><img src={logo} alt="" /></Link>
         <Link to='/' className='nav_elements'>Home</Link>
         <Link to='/' className='nav_elements'>Projects</Link>
         <Link to='/' className='nav_elements'>News & Updates</Link>

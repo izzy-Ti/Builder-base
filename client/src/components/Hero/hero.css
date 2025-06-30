@@ -8,14 +8,14 @@
     top: 0;
 }
 .hero_img::before {
-  content: '';
-  position: absolute;
-  top: 150;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 2;
+    content: '';
+    position: absolute;
+    top: 150;
+    left: 0;
+    height: 87%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.628);
+    z-index: 2;
 }
 .hero_components{
     margin-left:150px ;
@@ -32,7 +32,7 @@
     z-index: 999;
 }
 .hero_components h1 span {
-    font-size: 7rem;
+    font-size: 9rem;
     color: #00beb5;
     font-weight: bold;
 }

@@ -7,6 +7,7 @@ import user from './router/auth.route.js'
 import cookieParser from 'cookie-parser'
 import building from './router/building.router.js'
 import home from './router/home.router.js'
+import bodyParser from 'body-parser'
 
 dotenv.config()
 const app = express()
@@ -16,6 +17,7 @@ await connectDB()
 app.use(cookieParser())
 app.use(cors({credentials: true}))
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 app.use('/user', user)
 app.use('/home', home)
 app.use('/building', building)

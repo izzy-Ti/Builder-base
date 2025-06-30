@@ -10,9 +10,9 @@ dotenv.config()
 export const userRegistration = async (req,res) =>{
     const {fullname, email, username, password, role} = req.body
     const Useremail = await users.findOne({email})
-    const Username = await users.findOne({username})
-    if(Username || Useremail) {
-        res.json({success: 'false', message: 'Email already exists'})
+    const Userunique = await users.findOne({username})
+    if(Userunique || Useremail) {
+        return res.json({success: false, message: 'Email or Username already exists'})
     }
     try {
         const hashedPassword = await bycrpt.hash(password, 10)
@@ -31,20 +31,23 @@ export const userRegistration = async (req,res) =>{
             sameSite: process.env.EXPRESS_ENV === 'production' ? 'none' : 'strict',
             maxAge: 14 * 24 * 60 * 60 * 1000
             })
-        res.json({success: 'true', message: 'Signin successful'})
+        res.json({success: true, message: 'Signin successful'})
     } catch (error) {
-        req.json({success: 'false', message: 'Something went wrong'})
+        return res.json({success: false, message: 'Something went wrong'})
     }
 }
 
 export const userLogin = async (req,res) =>{
     const {username, password }= req.body 
     const user = await users.findOne({username})
-    if(!user || !password){
-        return res.json({success: 'false', message: 'All fields are required'})
+    if(!username || !password){
+        return res.json({success: false, message: 'All fields are required'})
+    }
+    if(!user){
+        return res.json({success: false, message: 'User not found'})
     }
     if(!(await bycrpt.compare(password, user.password))){
-        return res.json({success: 'false', message: 'Invalid credentials'})
+        return res.json({success: false, message: 'Invalid credentials'})
     }
     try{
         const token = jwt.sign({id:user._id}, process.env.TOKEN_SECRET)
@@ -54,9 +57,9 @@ export const userLogin = async (req,res) =>{
             sameSite: process.env.EXPRESS_ENV === 'production' ? 'none' : 'strict',
             maxAge: 14 * 24 * 60 * 60 * 1000
             })
-        res.json({success: 'true', message: 'Signin successful', user: user})
+        res.json({success: true, message: 'Login successful', user: user})
     } catch (error){
-        req.json({success: 'false', message: 'Something went wrong'})
+        req.json({success: false, message: 'Something went wrong'})
     }
 } 
 export const userUpdate = async (req,res) =>{
@@ -68,7 +71,7 @@ export const userUpdate = async (req,res) =>{
             email,
             username
         },{new:true})
-        res.json({success: 'true', message: 'Update successful', user: updateduser})
+        res.json({success: true, message: 'Update successful', user: updateduser})
     } catch (error) {
         return res.json({success: 'false', message: 'Something went wrong'})
     }
@@ -81,7 +84,7 @@ export const userPasswordReset = async (req,res) =>{
         const updateduser =await users.findByIdAndUpdate(user.id,{
             password:hashedPassword
         },{new:true})
-        res.json({success: 'true', message: 'Password updated successfully', user: updateduser})
+        res.json({success: true, message: 'Password updated successfully', user: updateduser})
     } catch(error) {
         return res.json({success: 'false', message: 'Something went wrong'})
     }
@@ -91,22 +94,26 @@ export const deleteuser = async (req,res) =>{
         const user = verifyuser(req,res);
         const deleteduser = await users.findByIdAndDelete(user.id)
         res.clearCookie('token')
-        res.json({success: 'true', message: 'Account deleted successfully'})
+        res.json({success: true, message: 'Account deleted successfully'})
     } catch (error) {
-        return res.json({success: 'false', message: 'Something went wrong'})
+        return res.json({success: false, message: 'Something went wrong'})
     }
 }
 export const logoutuser = async (req,res) =>{
-    res.clearCookie('token')
-    res.send('Logout successful')
+    try{
+        res.clearCookie('token')
+        res.json({success: true, message: 'Logout successful'})
+    } catch (error){
+        return res.json({success: false, message: 'Something went wrong'})
+    }
 }
 export const addfav = async (req,res) =>{
     const homeid = req.body
     try {
         const user = verifyuser(req,res);
         user.fav.push(homeid)
-        res.json({success: 'true', message: 'Added to Fav'})
+        res.json({success: true, message: 'Added to Fav'})
     } catch (error) {
-        return res.json({success: 'false', message: 'Something went wrong'})
+        return res.json({success: false, message: 'Something went wrong'})
     }
 }
