@@ -43,6 +43,7 @@ const Loginform = () => {
       if (toaster === true) {
         toast.success(message);
         navigate('/')
+        location.reload()
       } else if(toaster === false){
         toast.error(message);
       }

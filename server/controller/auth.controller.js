@@ -7,6 +7,14 @@ import { verifyuser } from "../middleware/auth.verify.js";
 
 dotenv.config()
 
+export const userfetch = async (req,res) =>{
+    const user = await verifyuser(req,res);
+    if(!user) {
+        return res.json({success: false, message: 'Email or Username already exists'})
+    }
+    return res.json({success: true, message: 'Signin successful', user:user})
+}
+
 export const userRegistration = async (req,res) =>{
     const {fullname, email, username, password, role} = req.body
     const Useremail = await users.findOne({email})
