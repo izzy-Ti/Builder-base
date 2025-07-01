@@ -8,7 +8,7 @@ router.use(express.json())
 
 router.get('/view', viewbuilding)
 router.post('/add',upload.array('image', 3), addbuilding)
-router.put('/update',verifyrole,upload.array('image', 3), updatebuilding)
-router.delete('/delete',verifyrole, deletebuilding)
+router.put('/update',upload.array('image', 3), updatebuilding)
+router.delete('/delete', deletebuilding)
 
 export default router

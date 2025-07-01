@@ -1,7 +1,7 @@
 import {building} from './../models/building.js'
 
 export const viewbuilding = async (req,res) =>{
-    const build = await building.find()
+    const build = await building.find().sort({createdAt: -1})
     res.json(build)
 }
 export const addbuilding = async (req,res) =>{
@@ -17,6 +17,10 @@ export const addbuilding = async (req,res) =>{
             discription, 
             status
         })
+        if(!status) return res.json({success: false, message: 'PLease select status'})
+        if(!name || !location || !floor || !built_year || !image || !discription){
+            return res.json({success: false, message: 'All fields are required'})
+        }
         await newbuilding.save()
         res.json({success: true, message: 'Building added successfully', building: newbuilding})
     } catch(error) {

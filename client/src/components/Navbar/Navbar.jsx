@@ -56,9 +56,9 @@ const Navbar = () => {
       <div className='navbar_route'>
         <Link to='/' ><img src={logo} alt="" /></Link>
         <Link to='/' className='nav_elements'>Home</Link>
-        <Link to='/' className='nav_elements'>Projects</Link>
-        <Link to='/' className='nav_elements'>News & Updates</Link>
-        <Link to='/' className='nav_elements'>About</Link>
+        <Link to='/projects' className='nav_elements'>Projects</Link>
+        <Link to='/news' className='nav_elements'>News & Updates</Link>
+        <Link to='/about' className='nav_elements'>About</Link>
       </div>
       <div>
         {islogged?(<div className='dashboard'>

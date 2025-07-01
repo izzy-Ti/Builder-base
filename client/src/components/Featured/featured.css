@@ -44,3 +44,16 @@
     margin: 10px 15px;
 
 }
+.show_all{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 20px;
+    background-color: #03312e;
+    color: white;
+    border-radius: 7px;
+    border: none;
+    font-size: 2rem;
+    font-weight: 200;
+    margin:30px 0px ;
+}

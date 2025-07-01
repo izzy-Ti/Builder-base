@@ -1,10 +1,69 @@
 .building_ad{
     margin: 50px 50px;
     display: flex;
-    align-items: center;
     flex-direction: column;
+    gap: 5px;
     width: 400px;
     background-color: rgba(0, 0, 0, 0.313);
     padding: 30px 30px;
     border-radius: 10px;
+}
+.building_admin{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.building_ad input{
+    height: 35px;
+    border: none;
+    outline: none;
+}
+.building_ad h2{
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+}
+.admin_bui{
+    width: 30%;
+}
+.all_buildings{
+    display: flex;
+    flex-direction: column;
+}
+.fea_car{
+    display: flex;
+    justify-content: space-around;
+    gap: 150px;
+    border: 2px solid black;
+
+}
+.fea_car p{
+    font-size: large;
+    padding: 10px 0px;
+}
+.table_tr{
+    padding: 10px 10px;
+}
+.building-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.building-table th,
+.building-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.building-table th {
+  background-color: #f4f4f4;
+  text-align: left;
+}
+
+.building-table td button {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
 }
