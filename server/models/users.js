@@ -6,7 +6,7 @@ const userSchema =new mongoose.Schema({
     username: {type:String, required:true, unique:true},
     password: {type:String, required:true},
     role: {type:String, enum: ['Admin', 'User'], default: 'User'},
-    fav: [{type: mongoose.Schema.ObjectId , ref: 'home'}]
+    fav: [{type: mongoose.Schema.ObjectId , ref: 'building'}]
 }, {timestamp: true})
 
 export const users = mongoose.model("user", userSchema)

@@ -4,6 +4,7 @@ import cookie from "cookie-parser";
 import bycrpt from 'bcryptjs'
 import dotenv from 'dotenv'
 import { verifyuser } from "../middleware/auth.verify.js";
+import { building } from "../models/building.js";
 
 dotenv.config()
 
@@ -119,14 +120,27 @@ export const logoutuser = async (req,res) =>{
         return res.json({success: false, message: 'Something went wrong'})
     }
 }
-export const addfav = async (req,res) =>{
-    const homeid = req.body
-    try {
+export const viewfav = async (req,res) =>{
+    try{
         const user = verifyuser(req,res);
-        if (res.headersSent) return;
-        user.fav.push(homeid)
-        res.json({success: true, message: 'Added to Fav'})
-    } catch (error) {
+        const favs = user.fav
+        const build = await building.findById(favs)
+        res.json({success: true, message: 'Favs are'})
+    } catch (error){
         return res.json({success: false, message: 'Something went wrong'})
     }
+}
+export const addfav = async (req,res) =>{
+    const buildingid = req.body.buildingid
+        const user =await verifyuser(req,res);
+        if (!Array.isArray(user.fav)) {
+            user.fav = [];
+        }
+        if (res.headersSent) return;
+        if (!user.fav.includes(buildingid)) {
+            user.fav.push(buildingid);
+            await user.save();
+        }
+        res.json({success: true, message: 'Added to Fav'})
+
 }
