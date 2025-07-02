@@ -1,27 +1,65 @@
-.building_ad{
-    margin: 50px 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    width: 400px;
-    background-color: rgba(0, 0, 0, 0.313);
-    padding: 30px 30px;
-    border-radius: 10px;
-}
+
 .building_admin{
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.building_ad input{
-    height: 35px;
-    border: none;
-    outline: none;
+.building_ad {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 60px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
 }
-.building_ad h2{
-    font-size: 2rem;
-    color: white;
-    font-weight: bold;
+.building_ad h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 24px;
+  color: #333;
+}
+.building_ad label {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #444;
+}
+.building_ad input[type="text"],
+.building_ad input[type="number"],
+.building_ad input[type="file"],
+.building_ad select {
+  width: 100%;
+  padding: 10px 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: border 0.3s ease;
+  font-size: 15px;
+}
+.building_ad input[type="text"]:focus,
+.building_ad input[type="number"]:focus,
+.building_ad select:focus {
+  outline: none;
+  border-color: #03312e;
+  background-color: #fff;
+}
+.admin_bui {
+  display: block;
+  margin-top: 24px;
+  width: 100%;
+  padding: 12px;
+  background-color: #03312e;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.admin_bui:hover {
+  background-color: #00524db6;
 }
 .admin_bui{
     width: 30%;

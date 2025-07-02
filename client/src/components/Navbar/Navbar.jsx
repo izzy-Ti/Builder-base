@@ -18,15 +18,7 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   
-  const logout = async () =>{
-    try{
-      const response = await axios.delete('http://localhost:4000/user/logout', {withCredentials: true})
-      settoaster(response.data.success)
-      setmessage(response.data.message)
-    } catch (error){
-      console.log('fetching error')
-    }
-  }
+
   useEffect(()=>{
     const fetch = async ()=>{
       try{
@@ -61,10 +53,9 @@ const Navbar = () => {
         <Link to='/about' className='nav_elements'>About</Link>
       </div>
       <div>
-        {islogged?(<div className='dashboard'>
-          <div>{dashboard && (<div className='dashboard_menu'><p onClick={logout}>Logout</p><p>Dashboard</p></div>)}</div>
-        <div className='user_sec'><h2 className='user_full'>{user.fullname}</h2><FaUser onClick={()=>{setdashboard(l => !l)}} className='user_icon'/></div>
-        </div>):(
+        {islogged?(
+        <div className='user_sec'><h2 className='user_full'>{user.fullname}</h2><FaUser onClick={()=>{navigate('/dashboard')}} className='user_icon'/></div>
+        ):(
         <Link to='/login' className='nav_login'>Login</Link>
         )}
       </div>

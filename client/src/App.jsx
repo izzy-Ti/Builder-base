@@ -9,6 +9,7 @@ import Navbar from './components/Navbar/Navbar.jsx'
 import Login from './pages/Login'
 import Admin from './pages/Admin.jsx'
 import Footer from './components/Footer/Footer.jsx'
+import Dashboard from './pages/Dashboard.jsx'
 
 
 
@@ -28,6 +29,7 @@ function App() {
         <Route path='/news' element= {<News />} />
         <Route path='/login' element = {<Login />} />
         <Route path='/admin' element = {<Admin />} />
+        <Route path='/dashboard' element = {<Dashboard />} />
       </Routes>
       <Footer />
     </>
