@@ -10,6 +10,7 @@ const Featured = () => {
     const [futured, setfutured] = useState([])
     const [show, setshow] = useState(false)
     const [slice, setslice] = useState(``)
+
     useEffect(()=>{
         const features = async () =>{
             const response = await axios.get('http://localhost:4000/building/view')

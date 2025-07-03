@@ -14,7 +14,19 @@ const Dash = () => {
     const navigate = useNavigate()
     const [toaster,settoaster] = useState(null)
     const [message,setmessage] = useState('')
+    const [favs, setfavs] = useState('')
     const [fav, setfav] = useState(false)
+    useEffect(()=>{
+        const viewfavs = async () =>{
+        const response = await axios.get('http://localhost:4000/user/viewfav')
+        if(!response.data.building){
+          setfavs('There is no favorites')
+        } else {
+          setfavs(response.data.building)
+        }
+      }
+      viewfavs();
+    },[])
     const logout = async () =>{
         try{
             const response = await axios.delete('http://localhost:4000/user/logout', {withCredentials: true})
@@ -48,7 +60,7 @@ const Dash = () => {
         </div>
         <div className="right_dash">
             {fav? (
-                <p>Fav</p>
+                <p>{favs}</p>
             ):(
                 <p>Manage</p>
             )}

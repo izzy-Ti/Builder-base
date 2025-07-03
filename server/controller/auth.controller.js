@@ -123,9 +123,10 @@ export const logoutuser = async (req,res) =>{
 export const viewfav = async (req,res) =>{
     try{
         const user = verifyuser(req,res);
+        if (res.headersSent) return;
         const favs = user.fav
         const build = await building.findById(favs)
-        res.json({success: true, message: 'Favs are'})
+        res.json({success: true, message: 'Favs are', building: build})
     } catch (error){
         return res.json({success: false, message: 'Something went wrong'})
     }
@@ -142,5 +143,4 @@ export const addfav = async (req,res) =>{
             await user.save();
         }
         res.json({success: true, message: 'Added to Fav'})
-
 }
