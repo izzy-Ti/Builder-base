@@ -7,15 +7,29 @@ import { UserCog } from 'lucide-react';
 import { LogOut } from 'lucide-react';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { FaUser } from 'react-icons/fa';
 
 
 
 const Dash = () => {
     const navigate = useNavigate()
+    const [user, setuser] = useState([])
     const [toaster,settoaster] = useState(null)
     const [message,setmessage] = useState('')
     const [favs, setfavs] = useState('')
     const [fav, setfav] = useState(false)
+
+    useEffect(()=>{
+      const fetch = async ()=>{
+        try{
+          const response = await axios.get('http://localhost:4000/user/fetch', {withCredentials: true})
+          setuser(response.data.user)
+        } catch (error){
+          console.log('fetching error')
+        }
+      }
+      fetch();
+    },[])
     useEffect(()=>{
         const viewfavs = async () =>{
         const response = await axios.get('http://localhost:4000/user/viewfav')
@@ -62,7 +76,14 @@ const Dash = () => {
             {fav? (
                 <p>{favs}</p>
             ):(
-                <p>Manage</p>
+              <>
+                    <h2><FaUser className='user_icon_dash' /></h2>
+                    <div className='user_profile'>
+                        <h4>Full Name: {user.fullname} </h4>
+                        <p>Email: {user.email}</p>
+                        <p>Username: {user.username}</p>
+                    </div>
+              </>
             )}
         </div>
     </div>

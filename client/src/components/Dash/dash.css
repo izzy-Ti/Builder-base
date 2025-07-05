@@ -23,3 +23,24 @@
     gap: 5px;
     cursor: pointer;
 }
+.user_profile{
+    margin: 10px 100px;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    gap: 10px;
+}
+.user_profile h4{
+    font-size: 2rem;
+}.user_profile p{
+    font-size: 1rem;
+}
+.user_icon_dash{
+    margin: 0px 120px;
+    margin-top: 50px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.575);
+    padding: 10px 10px;
+    border-radius: 50%;
+    font-size: 11rem;
+}

@@ -9,8 +9,15 @@ import { FaMapMarkerAlt, FaClock,FaArrowDown, FaArrowUp  } from 'react-icons/fa'
 const Featured = () => {
     const [futured, setfutured] = useState([])
     const [show, setshow] = useState(false)
-    const [slice, setslice] = useState(``)
-
+    const [buildingid, setbuildingid] = useState('')
+      const addfav = async () =>{
+        const response = await axios.get('http://localhost:4000/user/addfav',{buildingid},{withCredentials: true})
+        if(!response.data.building){
+          setfavs('There is no favorites')
+        } else {
+          setfavs(response.data.building)
+        }
+      }
     useEffect(()=>{
         const features = async () =>{
             const response = await axios.get('http://localhost:4000/building/view')

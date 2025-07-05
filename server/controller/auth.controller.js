@@ -141,6 +141,13 @@ export const addfav = async (req,res) =>{
         if (!user.fav.includes(buildingid)) {
             user.fav.push(buildingid);
             await user.save();
+            res.json({success: true, message: 'Added to Fav', status: 'added'})
         }
-        res.json({success: true, message: 'Added to Fav'})
+        if(user.fav.includes(buildingid)){
+            const index = user.fav.indexOf(buildingid);
+            if (index > -1) {
+                user.fav.splice(index, 1);
+                res.json({success: true, message: 'Added to Fav', status: 'removed'})
+            }
+        }
 }
